@@ -29,6 +29,7 @@ public class DataGenerator
 				Integer generatedID2 = min + (int)( Math.random() * (( max - min ) + 1));
 				
 				System.out.println(generatedID1 + "," + generatedID2);
+				
 				writer.append( generatedID1 + "," + generatedID2 );
 				writer.newLine();
 				
@@ -78,7 +79,7 @@ public class DataGenerator
 	//	if( dataGenerator.generatePoliticiansData( 0, 100, fileName ))
 		{
 			PoliticiansData politiciansData = new PoliticiansData();
-			politiciansData.loadDataFromFile(fileName);
+			politiciansData.findBadPoliticiansInFile( fileName ); 
 			politiciansData.print();
 			politiciansData.findBadPoliticians();
 		}

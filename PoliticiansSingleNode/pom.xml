@@ -3,11 +3,4 @@
   <groupId>com</groupId>
   <artifactId>PoliticiansSingleNode</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <dependencies>
-  	<dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.0.7</version>
-    </dependency>
-  </dependencies>
 </project>

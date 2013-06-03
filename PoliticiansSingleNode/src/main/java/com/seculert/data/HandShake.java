@@ -9,6 +9,45 @@ public class HandShake
 	
 	private BigInteger handshakeUid = null;
 	
+	
+	
+	
+	/**
+	 * @return the smallestUid
+	 */
+	public Integer getSmallestUid()
+	{
+		return smallestUid;
+	}
+
+
+	/**
+	 * @param smallestUid the smallestUid to set
+	 */
+	public void setSmallestUid(Integer smallestUid)
+	{
+		this.smallestUid = smallestUid;
+	}
+
+
+	/**
+	 * @return the biggestUid
+	 */
+	public Integer getBiggestUid()
+	{
+		return biggestUid;
+	}
+
+
+	/**
+	 * @param biggestUid the biggestUid to set
+	 */
+	public void setBiggestUid(Integer biggestUid) 
+	{
+		this.biggestUid = biggestUid;
+	}
+
+
 	/**
 	 * @return the handshakeUidx
 	 */

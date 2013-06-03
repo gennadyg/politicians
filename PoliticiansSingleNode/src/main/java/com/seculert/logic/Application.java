@@ -18,17 +18,15 @@ public class Application
 		{
 			PoliticiansData politiciansData = new PoliticiansData();
 			
+			// here example for a small input, for a huge input, 
+						// external sorting should be used, described as function comments
+						// without code
+						// politiciansData.makeExternalMergeSort();
+			
 			politiciansData.findBadPoliticiansInFile( fileName );
 			
 			//politiciansData.print();
 			
-			
-			// here example for a small input, for a huge input, 
-			// external sorting should be used, described as function comments
-			// without code
-			// politiciansData.makeExternalMergeSort();
-			
-			// politiciansData.findBadPoliticians();
 		}
 	}
 } 

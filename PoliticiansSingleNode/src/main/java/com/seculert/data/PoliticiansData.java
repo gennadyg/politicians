@@ -1,18 +1,18 @@
 package com.seculert.data;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class PoliticiansData 
 {
-	Map<BigInteger, HandShake> handshakeMap = new HashMap<BigInteger, HandShake>();
+	private Map<BigInteger, HandShake> handshakeMap = new HashMap<BigInteger, HandShake>();
+	
+	private HashSet<Integer> foundBadPoliticians = new HashSet<Integer>();
+	
 
 	public void print()
 	{
@@ -33,7 +33,6 @@ public class PoliticiansData
 	*/
 	public void makeExternalMergeSort()
 	{
-		
 	}
 	
 	public void findBadPoliticians()
@@ -61,14 +60,18 @@ public class PoliticiansData
 			
 		} catch (Exception e) 
 		{
-			System.e("", e);
+			System.err.println("Failed to find bad politicians");
 		}
 	}
 	
+	/**
+	 * @param id
+	 * @return
+	 */
 	public boolean isValidPoliticianID( String id )
 	{
 		boolean result = false;
-		if( ( id != null ) && ( id.length() > 0 ) && id.matches("\\d") )
+		if( ( id != null ) && ( id.length() > 0 ) && id.matches("\\d{1,10}") )
 		{
 			result = true;
 		}
@@ -87,7 +90,6 @@ public class PoliticiansData
 		Integer first = null;
 		Integer second = null;
 		HandShake foundHandShake = null;
-		DataInputStream in = null;
 		
 		// using auto closebable feature from Java 7
 		try ( BufferedReader br = new BufferedReader( new FileReader(fileName)))
@@ -110,20 +112,29 @@ public class PoliticiansData
 					  {
 						  foundHandShake = new HandShake( second, first );
 					  }
-					  HandShake badPoliticians = handshakeMap.put( foundHandShake.getHandshakeUid(), foundHandShake );
 					  
-					  if( badPoliticians != null  )
+					  if( handshakeMap.containsKey( foundHandShake.getHandshakeUid() ))
 					  {
-						  System.out.println("BAD " + badPoliticians.toString());
+						  // Checking that bad politician not printed already 
+						  if( foundBadPoliticians.contains( foundHandShake.getSmallestUid()) == false )
+						  {
+							  System.out.println("Found bad politician" + foundHandShake.getSmallestUid() );
+						  }
+						  if( foundBadPoliticians.contains( foundHandShake.getBiggestUid()) == false )
+						  {
+							  System.out.println("Found bad politician" + foundHandShake.getBiggestUid() );
+						  }						  
+					  
+					  }else // save handshake with UID
+					  {
+						  handshakeMap.put( foundHandShake.getHandshakeUid(), foundHandShake );  
 					  }
+					  
+					  
 				  }else
 				  {
-					  
+					  System.err.println("Bad data line found: " + strLine );
 				  }
-				  
-				 
-				  
-				 
 			  }
 			  
 		} catch (Exception e) 
