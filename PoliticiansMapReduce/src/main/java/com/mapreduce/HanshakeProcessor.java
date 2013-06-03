@@ -115,7 +115,7 @@ public class HanshakeProcessor
 					byte could contain bit indication of 8 numbers, integer cell will keep data about 
 					32 numbers, which will reduce mapping to 1 GB + Redis overhead.
 				*/				
-				if( numOfOccurences >= 2 )
+				if( numOfOccurences >= 2 /* notMeetBefore()*/)
 				{
 					reporter.incrCounter( Counters.BAD_POLITICIANS_RECORDS, 2 );
 					BigInteger uid = new BigInteger( String.valueOf( key.get()) );
@@ -125,12 +125,24 @@ public class HanshakeProcessor
 					LongWritable badPolitician1 = new LongWritable( uid.shiftRight( maxNumOfBitsInPoliticianID ).longValue());
 					LongWritable badPolitician2 = new LongWritable( uid.intValue() );
 					
-					// if not found before, not exist in cache, print as well.
-					output.collect( badPolitician1, one );
+					if( notExistInBadPoliticianHash( badPolitician1.get() ) )
+					{
+						// if not found before, not exist in cache, print as well.
+						putInBadPoliticiansFoundHash( badPolitician1.get() );
+						output.collect( badPolitician1, one );
+					}
+
 					
-					// if not found before, not exist in cache, print as well.
-					output.collect( badPolitician2, one );
-					// save badPolitician2 in cache of found 'bad' politicians
+					if( notExistInBadPoliticianHash( badPolitician1.get() ) )
+					{
+						// if not found before, not exist in cache, print as well.
+						output.collect( badPolitician2, one );
+						// save badPolitician2 in cache of found 'bad' politicians
+						putInBadPoliticiansFoundHash( badPolitician1.get() );
+					}
+					
+					
+					
 				}
 
 			}  		  
