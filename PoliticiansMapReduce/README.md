@@ -48,9 +48,8 @@ To save place, the numbers could be more efficiently saved, for instance each by
 bit indication of 8 numbers, integer cell could keep data about 32 numbers, 
 which will reduce mapping from 32 GB to 1 GB + cache framework overhead.
 
-
-To run program, run 'Application' class, which already contains a sample code. 'PoliticiansData' contains data manipulation logic.
-'HandShake' object represents data about politicians intersection aka handshake.
+For instance: to map 67, 67 / 32 = 2, which means that hash code '2' will be used, than 67 mod 32 = 3, 
+which means that bit number 3 will be set to 1, to indicate 67.
 
 
 Packaging:
