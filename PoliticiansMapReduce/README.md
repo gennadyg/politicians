@@ -40,7 +40,7 @@ for the same key were found, will indicate that 'bad' politicians were found.
 To prevent duplicate printing of 'bad' IDs that we saw already, all 'bad' politicians IDs will
 be kept in a separate 'cache'. 
 
-Memory size for cache:
+Memory size calculation for cache:
 
 To efficiently map in cache( like Redis) range of 8 billion numbers, 
 will needed, as straight forward solution, 8 billion people * 4 bytes( integer size ) = 32 GB + cache overhead,
